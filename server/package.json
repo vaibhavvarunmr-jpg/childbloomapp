@@ -1,0 +1,20 @@
+{
+  "name": "childbloom-server",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "@anthropic-ai/sdk": "^0.32.0",
+    "@supabase/supabase-js": "^2.47.0",
+    "cors": "^2.8.5",
+    "helmet": "^8.0.0",
+    "express-rate-limit": "^7.4.0",
+    "zod": "^3.24.0",
+    "dotenv": "^16.4.0"
+  }
+}

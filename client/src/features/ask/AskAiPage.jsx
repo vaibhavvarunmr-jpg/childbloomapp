@@ -1,0 +1,162 @@
+import { useState, useRef, useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import api from '../../lib/api';
+import { useSelectedChild } from '../../hooks/useChild';
+import { formatAgeInDays } from '../../lib/formatters';
+import Card from '../../components/ui/Card';
+import Button from '../../components/ui/Button';
+import MedicalDisclaimer from '../../components/layout/MedicalDisclaimer';
+import { ChatIcon, SendIcon } from '../../assets/icons';
+
+export default function AskAiPage() {
+  const child = useSelectedChild();
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const askMutation = useMutation({
+    mutationFn: async (question) => {
+      const response = await api.post('/api/ai/ask', {
+        question,
+        child_name: child?.name,
+        age_in_days: child?.date_of_birth ? formatAgeInDays(child.date_of_birth) : null,
+        gender: child?.gender,
+      });
+      return response.data?.answer || response.answer || 'I\'m sorry, I couldn\'t generate a response. Please try again.';
+    },
+  });
+
+  const handleSend = async () => {
+    const question = input.trim();
+    if (!question) return;
+
+    setInput('');
+    setMessages((prev) => [...prev, { role: 'user', content: question }]);
+
+    try {
+      const answer = await askMutation.mutateAsync(question);
+      setMessages((prev) => [...prev, { role: 'assistant', content: answer }]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: 'Sorry, something went wrong. Please try again in a moment.' },
+      ]);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const suggestedQuestions = [
+    'What milestones should I expect this month?',
+    'How much sleep does my child need?',
+    'What Indian foods are good for brain development?',
+    'When should I start potty training?',
+    'Is it normal for my child to not talk yet?',
+    'What vaccinations are due next?',
+  ];
+
+  return (
+    <div className="flex flex-col h-[calc(100vh-10rem)] sm:h-[calc(100vh-12rem)]">
+      <div className="mb-3 sm:mb-4">
+        <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Ask ChildBloom AI</h1>
+        <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
+          Get personalised guidance about {child?.name || 'your child'}'s development
+        </p>
+      </div>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+        {messages.length === 0 ? (
+          <div className="space-y-6 py-4">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <ChatIcon className="w-8 h-8 text-primary-500" />
+              </div>
+              <p className="text-sm text-gray-500">
+                Ask me anything about child development, nutrition, milestones, or parenting.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {suggestedQuestions.map((q) => (
+                <Card
+                  key={q}
+                  hover
+                  className="p-3 cursor-pointer active:scale-[0.98] transition-transform"
+                  onClick={() => {
+                    setInput(q);
+                  }}
+                >
+                  <p className="text-xs sm:text-sm text-gray-600">{q}</p>
+                </Card>
+              ))}
+            </div>
+          </div>
+        ) : (
+          messages.map((msg, i) => (
+            <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div
+                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  msg.role === 'user'
+                    ? 'bg-primary-500 text-white rounded-br-md'
+                    : 'bg-white border border-gray-100 text-gray-700 rounded-bl-md shadow-sm'
+                }`}
+              >
+                <p className="whitespace-pre-line">{msg.content}</p>
+              </div>
+            </div>
+          ))
+        )}
+
+        {askMutation.isPending && (
+          <div className="flex justify-start">
+            <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
+              <div className="flex gap-1.5">
+                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input */}
+      <div className="border-t border-gray-100 pt-3 sm:pt-4">
+        <div className="flex gap-2">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Ask about your child's development..."
+            rows={1}
+            className="input-field flex-1 resize-none min-h-[48px] max-h-32"
+          />
+          <Button
+            onClick={handleSend}
+            disabled={!input.trim() || askMutation.isPending}
+            size="icon"
+            className="self-end h-[48px] w-[48px] flex-shrink-0"
+          >
+            <SendIcon className="w-5 h-5" />
+          </Button>
+        </div>
+        <MedicalDisclaimer className="mt-2 sm:mt-3" />
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,131 @@
+{
+  "0-3": {
+    "label": "0–3 months",
+    "milestones": [
+      "Lifts head during tummy time",
+      "Tracks moving objects with eyes",
+      "Responds to sounds",
+      "Social smile",
+      "Makes cooing sounds",
+      "Brings hands to mouth",
+      "Grasps objects briefly"
+    ]
+  },
+  "3-6": {
+    "label": "3–6 months",
+    "milestones": [
+      "Rolls over (front to back or back to front)",
+      "Reaches for and grasps objects",
+      "Recognises familiar faces",
+      "Laughs out loud",
+      "Holds head steady",
+      "Pushes up on arms during tummy time",
+      "Begins babbling",
+      "Turns head toward sounds"
+    ]
+  },
+  "6-9": {
+    "label": "6–9 months",
+    "milestones": [
+      "Sits without support",
+      "Starts crawling or scooting",
+      "Picks up small objects (pincer grasp developing)",
+      "Responds to own name",
+      "Plays peek-a-boo",
+      "Transfers objects between hands",
+      "Stranger anxiety begins",
+      "Babbles with consonant sounds (ba-ba, da-da)"
+    ]
+  },
+  "9-12": {
+    "label": "9–12 months",
+    "milestones": [
+      "Pulls to stand",
+      "Cruises along furniture",
+      "Says mama or dada (with meaning)",
+      "Waves bye-bye",
+      "Points at objects",
+      "Understands simple instructions",
+      "Claps hands",
+      "Picks up small objects with pincer grasp"
+    ]
+  },
+  "12-18": {
+    "label": "1–1.5 years",
+    "milestones": [
+      "Walks independently",
+      "Says several words",
+      "Stacks 2-3 blocks",
+      "Uses spoon (messily)",
+      "Points to show things",
+      "Follows simple directions",
+      "Scribbles with crayon",
+      "Drinks from cup"
+    ]
+  },
+  "18-24": {
+    "label": "1.5–2 years",
+    "milestones": [
+      "Runs",
+      "Kicks a ball",
+      "Says 10+ words",
+      "Combines two words",
+      "Stacks 4+ blocks",
+      "Sorts shapes",
+      "Begins pretend play",
+      "Shows defiant behaviour (says no)"
+    ]
+  },
+  "24-36": {
+    "label": "2–3 years",
+    "milestones": [
+      "Jumps with both feet",
+      "Climbs well",
+      "Speaks in sentences (3+ words)",
+      "Names familiar objects",
+      "Plays alongside other children",
+      "Follows 2-step instructions",
+      "Turns pages of a book",
+      "Pedals a tricycle"
+    ]
+  },
+  "36-48": {
+    "label": "3–4 years",
+    "milestones": [
+      "Draws a circle",
+      "Uses scissors",
+      "Dresses and undresses with help",
+      "Plays cooperatively with others",
+      "Speaks clearly enough for strangers to understand",
+      "Counts to 10",
+      "Understands concept of same/different",
+      "Hops on one foot"
+    ]
+  },
+  "48-60": {
+    "label": "4–5 years",
+    "milestones": [
+      "Draws a person with 2-4 body parts",
+      "Tells stories",
+      "Prints some letters",
+      "Rides a tricycle or bicycle with training wheels",
+      "Buttons and unbuttons",
+      "Counts to 20",
+      "Knows basic colours and shapes",
+      "Shows concern for others"
+    ]
+  },
+  "60-84": {
+    "label": "5–7 years",
+    "milestones": [
+      "Reads simple words",
+      "Writes own name",
+      "Counts to 100",
+      "Ties shoelaces",
+      "Rides a bicycle",
+      "Tells time",
+      "Understands right from wrong",
+      "Plays team games with rules"
+    ]
+  }
+}
