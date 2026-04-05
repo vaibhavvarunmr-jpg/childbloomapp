@@ -9,10 +9,10 @@ export default function AppLayout() {
   useChildren();
 
   return (
-    // Exact background from prompt
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex">
+    // 60% (#F7F4EF) — main canvas
+    <div className="min-h-screen flex" style={{ background: '#F7F4EF' }}>
 
-      {/* Vertical dock — desktop only, left side */}
+      {/* Vertical dock — desktop left */}
       <div className="hidden lg:flex items-start justify-center px-4 py-6 flex-shrink-0">
         <div className="sticky top-6">
           <MinimalDock />
@@ -31,7 +31,7 @@ export default function AppLayout() {
         </main>
       </div>
 
-      {/* Mobile bottom dock */}
+      {/* Mobile horizontal dock */}
       <MobileNav />
     </div>
   );
