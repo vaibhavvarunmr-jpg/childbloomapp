@@ -4,14 +4,14 @@ const Input = forwardRef(({ label, error, type = 'text', className = '', ...prop
   return (
     <div className="space-y-1.5">
       {label && (
-        <label className="block text-caption font-semibold text-forest-700 tracking-tight">
+        <label className="block text-caption font-semibold text-gray-700 tracking-tight">
           {label}
         </label>
       )}
       <input
         ref={ref}
         type={type}
-        className={`input-field ${error ? 'border-red-300 focus:ring-red-500/20 focus:border-red-400' : ''} ${className}`}
+        className={`input-field ${error ? '!border-red-300 focus:!ring-red-500/20 focus:!border-red-400' : ''} ${className}`}
         {...props}
       />
       {error && (

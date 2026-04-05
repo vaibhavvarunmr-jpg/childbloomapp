@@ -1,7 +1,7 @@
 export default function Button({ children, variant = 'primary', size = 'md', disabled, loading, className = '', ...props }) {
   const base = `
     inline-flex items-center justify-center font-semibold tracking-tight
-    rounded-xl transition-all duration-250 ease-out
+    rounded-2xl transition-all duration-250 ease-out
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
     disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
     relative overflow-hidden select-none
@@ -9,42 +9,76 @@ export default function Button({ children, variant = 'primary', size = 'md', dis
 
   const variants = {
     primary: `
-      bg-terracotta-400 text-white shadow-btn
-      hover:bg-terracotta-500 hover:shadow-btn-hover hover:-translate-y-0.5
-      active:translate-y-0 active:shadow-btn active:scale-[0.98]
-      focus-visible:ring-terracotta-400
+      text-white
+      hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]
+      focus-visible:ring-rose-400
     `,
     secondary: `
-      bg-white text-forest-600 border-2 border-forest-100
-      hover:bg-forest-50 hover:border-forest-200 hover:-translate-y-0.5
-      active:translate-y-0 active:scale-[0.98]
-      focus-visible:ring-forest-400
+      text-gray-700 border border-gray-200/80
+      hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]
+      focus-visible:ring-gray-300
     `,
     ghost: `
-      bg-transparent text-forest-600
-      hover:bg-cream-200 hover:text-forest-700
-      active:bg-cream-300 active:scale-[0.98]
-      focus-visible:ring-forest-400
+      bg-transparent text-gray-600
+      hover:text-gray-800
+      active:scale-[0.98]
+      focus-visible:ring-gray-300
     `,
     danger: `
-      bg-red-500 text-white shadow-subtle
-      hover:bg-red-600 hover:-translate-y-0.5 hover:shadow-elevated
-      active:translate-y-0 active:scale-[0.98]
+      text-white
+      hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]
       focus-visible:ring-red-400
     `,
   };
 
   const sizes = {
-    sm: 'px-4 py-2 text-caption gap-1.5',
-    md: 'px-5 py-2.5 text-body gap-2',
-    lg: 'px-7 py-3.5 text-body-lg gap-2',
+    sm:   'px-4 py-2 text-caption gap-1.5',
+    md:   'px-5 py-2.5 text-body gap-2',
+    lg:   'px-7 py-3.5 text-body-lg gap-2',
     icon: 'p-2.5',
+  };
+
+  const variantStyles = {
+    primary: {
+      background: 'linear-gradient(135deg, #FB7185 0%, #F43F5E 50%, #E11D48 100%)',
+      boxShadow: '0 4px 16px rgba(244,63,94,0.28), 0 1px 4px rgba(244,63,94,0.2)',
+    },
+    secondary: {
+      background: 'rgba(255, 255, 255, 0.8)',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
+      boxShadow: '0 1px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.7)',
+    },
+    ghost: {
+      background: 'transparent',
+    },
+    danger: {
+      background: 'linear-gradient(135deg, #F87171 0%, #EF4444 50%, #DC2626 100%)',
+      boxShadow: '0 4px 16px rgba(239,68,68,0.28), 0 1px 4px rgba(239,68,68,0.2)',
+    },
   };
 
   return (
     <button
       className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+      style={variantStyles[variant]}
       disabled={disabled || loading}
+      onMouseEnter={(e) => {
+        if (disabled || loading) return;
+        if (variant === 'primary') {
+          e.currentTarget.style.boxShadow = '0 6px 24px rgba(244,63,94,0.38), 0 2px 8px rgba(244,63,94,0.26)';
+        } else if (variant === 'secondary') {
+          e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.8)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (disabled || loading) return;
+        if (variant === 'primary') {
+          e.currentTarget.style.boxShadow = '0 4px 16px rgba(244,63,94,0.28), 0 1px 4px rgba(244,63,94,0.2)';
+        } else if (variant === 'secondary') {
+          e.currentTarget.style.boxShadow = '0 1px 6px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.7)';
+        }
+      }}
       {...props}
     >
       {loading && (
@@ -54,10 +88,10 @@ export default function Button({ children, variant = 'primary', size = 'md', dis
         </svg>
       )}
       {children}
-      {/* Shine effect on hover for primary */}
+      {/* Subtle shine for primary */}
       {variant === 'primary' && !disabled && !loading && (
-        <span className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
-          <span className="absolute top-0 -left-[75%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg] transition-all duration-500 group-hover:left-[125%]" />
+        <span className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+          <span className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/20 to-transparent" />
         </span>
       )}
     </button>
