@@ -1,11 +1,11 @@
-export default function Card({ children, className = '', hover = false, onClick, gradient = false, ...props }) {
+export default function Card({ children, className = '', hover = false, onClick, accent, ...props }) {
   return (
     <div
       className={`
-        bg-white rounded-3xl border border-gray-100/80 shadow-soft
-        ${hover ? 'hover-lift cursor-pointer press-effect hover:border-gray-200/80 hover:shadow-soft-md' : ''}
-        ${gradient ? 'bg-gradient-to-br' : ''}
-        transition-all duration-300
+        bg-white rounded-2xl border border-cream-300/80 shadow-card
+        ${hover ? 'hover-lift cursor-pointer hover:border-cream-300 hover:shadow-elevated active:scale-[0.98] transition-all duration-250' : 'transition-all duration-200'}
+        ${accent === 'terracotta' ? 'accent-left' : ''}
+        ${accent === 'green' ? 'accent-left-green' : ''}
         ${className}
       `}
       onClick={onClick}

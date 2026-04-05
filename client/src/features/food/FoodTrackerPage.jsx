@@ -81,7 +81,6 @@ export default function FoodTrackerPage() {
     return map[type] || 'default';
   };
 
-  // Group logs by date
   const grouped = (logs || []).reduce((acc, log) => {
     const date = log.log_date;
     if (!acc[date]) acc[date] = [];
@@ -93,8 +92,8 @@ export default function FoodTrackerPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Food Tracker</h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 truncate">Track {child?.name || 'your child'}'s meals</p>
+          <h1 className="text-h1 font-serif text-forest-700">Food Tracker</h1>
+          <p className="text-body text-gray-500 mt-1 truncate">Track {child?.name || 'your child'}'s meals</p>
         </div>
         <Button onClick={() => setShowForm(true)} size="sm" className="flex-shrink-0">
           <PlusIcon className="w-4 h-4 sm:mr-1" /> <span className="hidden sm:inline">Add Meal</span><span className="sm:hidden">Add</span>
@@ -111,27 +110,27 @@ export default function FoodTrackerPage() {
         />
       ) : (
         Object.entries(grouped).map(([date, items]) => (
-          <div key={date} className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-500">{formatDate(date)}</h3>
+          <div key={date} className="space-y-2.5">
+            <h3 className="text-micro font-semibold text-gray-400 uppercase tracking-wider">{formatDate(date)}</h3>
             {items.map((log) => (
               <Card key={log.id} className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <p className="text-sm font-medium text-gray-900">{log.food_name}</p>
+                      <p className="text-caption font-semibold text-forest-700">{log.food_name}</p>
                       <Badge variant={mealBadgeVariant(log.meal_type)}>{mealLabel(log.meal_type)}</Badge>
                     </div>
-                    <div className="flex gap-3 text-xs text-gray-500">
+                    <div className="flex gap-3 text-micro text-gray-500">
                       {log.quantity && <span>{log.quantity}</span>}
                       {log.notes && <span>{log.notes}</span>}
                     </div>
                     {log.reaction && (
-                      <p className="text-xs text-red-500 mt-1">Reaction: {log.reaction}</p>
+                      <p className="text-micro text-red-500 mt-1">Reaction: {log.reaction}</p>
                     )}
                   </div>
                   <button
                     onClick={() => deleteMutation.mutate(log.id)}
-                    className="p-1 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-1.5 hover:bg-red-50 rounded-lg transition-colors"
                   >
                     <TrashIcon className="w-4 h-4 text-gray-400 hover:text-red-500" />
                   </button>
@@ -151,16 +150,16 @@ export default function FoodTrackerPage() {
             onChange={(e) => setFormData({ ...formData, log_date: e.target.value })}
           />
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-gray-700">Meal Type</label>
+            <label className="block text-caption font-semibold text-forest-700">Meal Type</label>
             <div className="grid grid-cols-2 gap-2">
               {MEAL_TYPES.map((type) => (
                 <button
                   key={type.value}
                   onClick={() => setFormData({ ...formData, meal_type: type.value })}
-                  className={`py-2.5 px-3 rounded-xl text-sm font-medium border-2 transition-all ${
+                  className={`py-2.5 px-3 rounded-xl text-caption font-medium border-2 transition-all duration-200 ${
                     formData.meal_type === type.value
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                      ? 'border-forest-500 bg-forest-50 text-forest-700'
+                      : 'border-cream-300 text-gray-600 hover:border-cream-300'
                   }`}
                 >
                   {type.label}

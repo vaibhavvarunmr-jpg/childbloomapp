@@ -6,12 +6,12 @@ export default function Stepper({ steps, currentStep, onStepClick }) {
           <button
             onClick={() => onStepClick?.(index)}
             disabled={index > currentStep}
-            className={`relative w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-semibold transition-all duration-500 flex-shrink-0 ${
+            className={`relative w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-semibold transition-all duration-300 flex-shrink-0 ${
               index < currentStep
-                ? 'bg-gradient-to-br from-primary-400 to-primary-600 text-white shadow-glow/50'
+                ? 'bg-forest-600 text-white'
                 : index === currentStep
-                ? 'bg-gradient-to-br from-primary-500 to-primary-600 text-white ring-2 sm:ring-[3px] ring-primary-100 shadow-glow'
-                : 'bg-gray-100 text-gray-400'
+                ? 'bg-terracotta-400 text-white ring-2 sm:ring-[3px] ring-terracotta-50'
+                : 'bg-cream-200 text-gray-400'
             }`}
             aria-label={`Step ${index + 1}: ${step}`}
           >
@@ -26,7 +26,7 @@ export default function Stepper({ steps, currentStep, onStepClick }) {
           {index < steps.length - 1 && (
             <div className="w-4 sm:w-10 h-[2px] mx-0.5">
               <div className={`h-full rounded-full transition-all duration-500 ${
-                index < currentStep ? 'bg-gradient-to-r from-primary-500 to-primary-400' : 'bg-gray-200'
+                index < currentStep ? 'bg-forest-400' : 'bg-cream-300'
               }`} />
             </div>
           )}

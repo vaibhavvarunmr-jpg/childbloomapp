@@ -100,8 +100,8 @@ export default function HealthRecordsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Health Records</h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 truncate">{child?.name || 'Your child'}'s medical history</p>
+          <h1 className="text-h1 font-serif text-forest-700">Health Records</h1>
+          <p className="text-body text-gray-500 mt-1 truncate">{child?.name || 'Your child'}'s medical history</p>
         </div>
         <Button onClick={() => setShowForm(true)} size="sm" className="flex-shrink-0">
           <PlusIcon className="w-4 h-4 sm:mr-1" /> <span className="hidden sm:inline">Add Record</span><span className="sm:hidden">Add</span>
@@ -125,26 +125,26 @@ export default function HealthRecordsPage() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="text-sm font-medium text-gray-900">{record.title}</p>
+                    <p className="text-caption font-semibold text-forest-700">{record.title}</p>
                     <Badge variant={typeBadgeVariant(record.record_type)}>
                       {typeLabel(record.record_type)}
                     </Badge>
                   </div>
-                  <p className="text-xs text-gray-500">{formatDate(record.record_date)}</p>
-                  <div className="flex gap-4 text-xs text-gray-500 mt-1">
+                  <p className="text-micro text-gray-400">{formatDate(record.record_date)}</p>
+                  <div className="flex gap-4 text-micro text-gray-500 mt-1">
                     {record.doctor_name && <span>Dr. {record.doctor_name}</span>}
                     {record.clinic_name && <span>{record.clinic_name}</span>}
                   </div>
                   {record.notes && (
-                    <p className="text-xs text-gray-500 mt-2">{record.notes}</p>
+                    <p className="text-micro text-gray-500 mt-2">{record.notes}</p>
                   )}
                   {record.next_due_date && (
-                    <p className="text-xs text-primary-600 mt-1">Next due: {formatDate(record.next_due_date)}</p>
+                    <p className="text-micro text-terracotta-400 font-medium mt-1">Next due: {formatDate(record.next_due_date)}</p>
                   )}
                 </div>
                 <button
                   onClick={() => deleteMutation.mutate(record.id)}
-                  className="p-1 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-1.5 hover:bg-red-50 rounded-lg transition-colors"
                 >
                   <TrashIcon className="w-4 h-4 text-gray-400 hover:text-red-500" />
                 </button>
@@ -163,16 +163,16 @@ export default function HealthRecordsPage() {
             onChange={(e) => setFormData({ ...formData, record_date: e.target.value })}
           />
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-gray-700">Record Type</label>
+            <label className="block text-caption font-semibold text-forest-700">Record Type</label>
             <div className="grid grid-cols-2 gap-2">
               {RECORD_TYPES.map((type) => (
                 <button
                   key={type.value}
                   onClick={() => setFormData({ ...formData, record_type: type.value })}
-                  className={`py-2.5 px-3 rounded-xl text-sm font-medium border-2 transition-all ${
+                  className={`py-2.5 px-3 rounded-xl text-caption font-medium border-2 transition-all duration-200 ${
                     formData.record_type === type.value
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                      ? 'border-forest-500 bg-forest-50 text-forest-700'
+                      : 'border-cream-300 text-gray-600 hover:border-cream-300'
                   }`}
                 >
                   {type.label}

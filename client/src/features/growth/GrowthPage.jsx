@@ -81,7 +81,7 @@ export default function GrowthPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Growth Chart</h1>
+        <h1 className="text-h1 font-serif text-forest-700">Growth Chart</h1>
         <Button onClick={() => setShowForm(true)} size="sm" className="flex-shrink-0">
           <PlusIcon className="w-4 h-4 mr-1" /> Add
         </Button>
@@ -89,24 +89,23 @@ export default function GrowthPage() {
 
       <Tabs tabs={TABS} activeTab={activeTab} onChange={setActiveTab} />
 
-      {/* Chart */}
       {chartData.length > 0 ? (
-        <Card className="p-3 sm:p-4 -mx-1 sm:mx-0">
-          <ResponsiveContainer width="100%" height={240}>
+        <Card className="p-3 sm:p-5">
+          <ResponsiveContainer width="100%" height={260}>
             <ComposedChart data={chartData} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
-              <YAxis tick={{ fontSize: 10 }} domain={['auto', 'auto']} width={35} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E8E4DF" />
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#8B9DAF' }} interval="preserveStartEnd" />
+              <YAxis tick={{ fontSize: 10, fill: '#8B9DAF' }} domain={['auto', 'auto']} width={35} />
               <Tooltip
-                contentStyle={{ borderRadius: '12px', border: '1px solid #e5e7eb', fontSize: '12px', padding: '8px 12px' }}
+                contentStyle={{ borderRadius: '12px', border: '1px solid #E8E4DF', fontSize: '12px', padding: '8px 12px', backgroundColor: '#fff' }}
               />
               <Line
                 type="monotone"
                 dataKey={activeTab}
-                stroke="#1D9E75"
-                strokeWidth={2}
-                dot={{ fill: '#1D9E75', r: 3 }}
-                activeDot={{ r: 5, strokeWidth: 2 }}
+                stroke="#2D6A4F"
+                strokeWidth={2.5}
+                dot={{ fill: '#2D6A4F', r: 3.5, strokeWidth: 0 }}
+                activeDot={{ r: 5, strokeWidth: 2, stroke: '#E9F5EF', fill: '#2D6A4F' }}
                 connectNulls
               />
             </ComposedChart>
@@ -122,26 +121,25 @@ export default function GrowthPage() {
         />
       )}
 
-      {/* Records Table */}
       {records && records.length > 0 && (
         <Card className="overflow-hidden">
-          <div className="overflow-x-auto -webkit-overflow-scrolling-touch">
-            <table className="w-full text-xs sm:text-sm min-w-[320px]">
+          <div className="overflow-x-auto">
+            <table className="w-full text-caption min-w-[320px]">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left p-2.5 sm:p-4 font-medium text-gray-500">Date</th>
-                  <th className="text-left p-2.5 sm:p-4 font-medium text-gray-500">Weight</th>
-                  <th className="text-left p-2.5 sm:p-4 font-medium text-gray-500">Height</th>
-                  <th className="text-left p-2.5 sm:p-4 font-medium text-gray-500">Head</th>
+                <tr className="border-b border-cream-300/60">
+                  <th className="text-left p-3 sm:p-4 font-semibold text-gray-400 text-micro uppercase tracking-wider">Date</th>
+                  <th className="text-left p-3 sm:p-4 font-semibold text-gray-400 text-micro uppercase tracking-wider">Weight</th>
+                  <th className="text-left p-3 sm:p-4 font-semibold text-gray-400 text-micro uppercase tracking-wider">Height</th>
+                  <th className="text-left p-3 sm:p-4 font-semibold text-gray-400 text-micro uppercase tracking-wider">Head</th>
                 </tr>
               </thead>
               <tbody>
                 {[...records].reverse().map((r) => (
-                  <tr key={r.id} className="border-b border-gray-50">
-                    <td className="p-2.5 sm:p-4 text-gray-900 whitespace-nowrap">{formatDate(r.record_date)}</td>
-                    <td className="p-2.5 sm:p-4 text-gray-600">{formatWeight(r.weight_kg)}</td>
-                    <td className="p-2.5 sm:p-4 text-gray-600">{formatHeight(r.height_cm)}</td>
-                    <td className="p-2.5 sm:p-4 text-gray-600">{r.head_circumference_cm ? `${r.head_circumference_cm} cm` : '—'}</td>
+                  <tr key={r.id} className="border-b border-cream-200/60">
+                    <td className="p-3 sm:p-4 text-forest-700 font-medium whitespace-nowrap">{formatDate(r.record_date)}</td>
+                    <td className="p-3 sm:p-4 text-gray-600">{formatWeight(r.weight_kg)}</td>
+                    <td className="p-3 sm:p-4 text-gray-600">{formatHeight(r.height_cm)}</td>
+                    <td className="p-3 sm:p-4 text-gray-600">{r.head_circumference_cm ? `${r.head_circumference_cm} cm` : '—'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -150,7 +148,6 @@ export default function GrowthPage() {
         </Card>
       )}
 
-      {/* Add Measurement Modal */}
       <Modal isOpen={showForm} onClose={() => setShowForm(false)} title="Add Measurement">
         <div className="space-y-4">
           <Input

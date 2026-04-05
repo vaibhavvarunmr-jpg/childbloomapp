@@ -1,18 +1,44 @@
 export default function Button({ children, variant = 'primary', size = 'md', disabled, loading, className = '', ...props }) {
-  const base = 'inline-flex items-center justify-center font-medium rounded-2xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none press-effect relative overflow-hidden';
+  const base = `
+    inline-flex items-center justify-center font-semibold tracking-tight
+    rounded-xl transition-all duration-250 ease-out
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+    disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+    relative overflow-hidden select-none
+  `;
 
   const variants = {
-    primary: 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-soft hover:shadow-glow',
-    secondary: 'bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 hover:border-gray-300 shadow-soft hover:shadow-soft-md',
-    ghost: 'bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900',
-    danger: 'bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white shadow-soft',
+    primary: `
+      bg-terracotta-400 text-white shadow-btn
+      hover:bg-terracotta-500 hover:shadow-btn-hover hover:-translate-y-0.5
+      active:translate-y-0 active:shadow-btn active:scale-[0.98]
+      focus-visible:ring-terracotta-400
+    `,
+    secondary: `
+      bg-white text-forest-600 border-2 border-forest-100
+      hover:bg-forest-50 hover:border-forest-200 hover:-translate-y-0.5
+      active:translate-y-0 active:scale-[0.98]
+      focus-visible:ring-forest-400
+    `,
+    ghost: `
+      bg-transparent text-forest-600
+      hover:bg-cream-200 hover:text-forest-700
+      active:bg-cream-300 active:scale-[0.98]
+      focus-visible:ring-forest-400
+    `,
+    danger: `
+      bg-red-500 text-white shadow-subtle
+      hover:bg-red-600 hover:-translate-y-0.5 hover:shadow-elevated
+      active:translate-y-0 active:scale-[0.98]
+      focus-visible:ring-red-400
+    `,
   };
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm gap-1.5',
-    md: 'px-5 py-3 text-sm gap-2',
-    lg: 'px-8 py-4 text-base gap-2',
-    icon: 'p-3',
+    sm: 'px-4 py-2 text-caption gap-1.5',
+    md: 'px-5 py-2.5 text-body gap-2',
+    lg: 'px-7 py-3.5 text-body-lg gap-2',
+    icon: 'p-2.5',
   };
 
   return (
@@ -28,6 +54,12 @@ export default function Button({ children, variant = 'primary', size = 'md', dis
         </svg>
       )}
       {children}
+      {/* Shine effect on hover for primary */}
+      {variant === 'primary' && !disabled && !loading && (
+        <span className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
+          <span className="absolute top-0 -left-[75%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg] transition-all duration-500 group-hover:left-[125%]" />
+        </span>
+      )}
     </button>
   );
 }

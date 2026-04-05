@@ -32,12 +32,12 @@ export default function LoginPage() {
   };
 
   return (
-    <Card className="p-8 backdrop-blur-xl bg-white/80 border-white/50 shadow-soft-lg">
-      <h2 className="text-2xl font-serif font-bold text-gray-900 text-center mb-1">Welcome back</h2>
-      <p className="text-sm text-gray-500 text-center mb-8">Sign in to continue tracking your child's growth</p>
+    <Card className="p-8 sm:p-10 shadow-elevated border-cream-200">
+      <h2 className="text-h2 font-serif text-forest-700 text-center mb-1">Welcome back</h2>
+      <p className="text-body text-gray-500 text-center mb-8">Sign in to continue tracking</p>
 
       {error && (
-        <div className="bg-red-50 border border-red-100 text-red-600 text-sm rounded-2xl p-4 mb-6 flex items-center gap-2 animate-scale-in">
+        <div className="bg-red-50 border border-red-100 text-red-600 text-caption rounded-xl p-4 mb-6 flex items-center gap-2.5 animate-scale-in">
           <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -66,15 +66,15 @@ export default function LoginPage() {
       </form>
 
       <div className="relative my-8">
-        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200/60" /></div>
-        <div className="relative flex justify-center text-xs">
-          <span className="bg-white/80 px-3 text-gray-400">or</span>
+        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-cream-300" /></div>
+        <div className="relative flex justify-center">
+          <span className="bg-white px-4 text-micro text-gray-400 uppercase tracking-wider">or</span>
         </div>
       </div>
 
-      <p className="text-sm text-gray-500 text-center">
+      <p className="text-body text-gray-500 text-center">
         Don't have an account?{' '}
-        <Link to="/signup" className="text-primary-600 font-semibold hover:text-primary-700 transition-colors">
+        <Link to="/signup" className="text-terracotta-400 font-semibold hover:text-terracotta-500 transition-colors">
           Sign up free
         </Link>
       </p>

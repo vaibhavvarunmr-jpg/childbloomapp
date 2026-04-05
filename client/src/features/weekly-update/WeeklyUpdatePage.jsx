@@ -5,7 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { useChildById } from '../../hooks/useChild';
 import useAuthStore from '../../stores/authStore';
 import api from '../../lib/api';
-import { formatAgeInDays, getAgeInMonths } from '../../lib/formatters';
+import { formatAgeInDays } from '../../lib/formatters';
 import Stepper from '../../components/ui/Stepper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
@@ -137,17 +137,17 @@ export default function WeeklyUpdatePage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto space-y-4 sm:space-y-6">
+    <div className="max-w-xl mx-auto space-y-5">
       <div className="text-center">
-        <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Weekly Check-in</h1>
-        <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
+        <h1 className="text-h1 font-serif text-forest-700">Weekly Check-in</h1>
+        <p className="text-body text-gray-500 mt-1">
           {child?.name ? `How was ${child.name}'s week?` : 'How was this week?'}
         </p>
       </div>
 
       <Stepper steps={STEPS} currentStep={step} onStepClick={(i) => i <= step && setStep(i)} />
 
-      <Card className="p-4 sm:p-6">
+      <Card className="p-5 sm:p-6">
         {step === 0 && <MeasurementsStep formData={formData} updateField={updateField} />}
         {step === 1 && <MoodStep formData={formData} updateField={updateField} />}
         {step === 2 && <MilestonesStep formData={formData} updateField={updateField} child={child} />}

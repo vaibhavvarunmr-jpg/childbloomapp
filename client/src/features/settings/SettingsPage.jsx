@@ -76,16 +76,16 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 max-w-2xl">
-      <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Settings</h1>
+    <div className="space-y-5 max-w-2xl">
+      <h1 className="text-h1 font-serif text-forest-700">Settings</h1>
 
       {/* Profile Section */}
-      <Card className="p-4 sm:p-6">
+      <Card className="p-5 sm:p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center">
-            <UserIcon className="w-5 h-5 text-primary-600" />
+          <div className="w-10 h-10 bg-forest-50 rounded-xl flex items-center justify-center">
+            <UserIcon className="w-5 h-5 text-forest-600" />
           </div>
-          <h2 className="text-lg font-serif font-semibold text-gray-900">Profile</h2>
+          <h2 className="text-h3 font-serif text-forest-700">Profile</h2>
         </div>
 
         {editingProfile ? (
@@ -105,32 +105,32 @@ export default function SettingsPage() {
             </div>
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-sm text-gray-500">Name</p>
-                <p className="text-sm font-medium text-gray-900">{profile?.full_name || 'Not set'}</p>
+                <p className="text-micro text-gray-400 uppercase tracking-wider">Name</p>
+                <p className="text-caption font-medium text-forest-700">{profile?.full_name || 'Not set'}</p>
               </div>
               <Button variant="ghost" size="sm" onClick={() => { setProfileName(profile?.full_name || ''); setEditingProfile(true); }}>
                 Edit
               </Button>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Email</p>
-              <p className="text-sm font-medium text-gray-900">{user?.email}</p>
+              <p className="text-micro text-gray-400 uppercase tracking-wider">Email</p>
+              <p className="text-caption font-medium text-forest-700">{user?.email}</p>
             </div>
           </div>
         )}
       </Card>
 
       {/* Children Section */}
-      <Card className="p-4 sm:p-6">
+      <Card className="p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
               <BabyIcon className="w-5 h-5 text-blue-600" />
             </div>
-            <h2 className="text-lg font-serif font-semibold text-gray-900">Children</h2>
+            <h2 className="text-h3 font-serif text-forest-700">Children</h2>
           </div>
           <Button size="sm" onClick={() => setShowAddChild(true)}>
             <PlusIcon className="w-4 h-4 mr-1" /> Add
@@ -139,16 +139,16 @@ export default function SettingsPage() {
 
         <div className="space-y-3">
           {(children || []).map((child) => (
-            <div key={child.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+            <div key={child.id} className="flex items-center justify-between p-3.5 bg-cream-100 rounded-xl">
               <div
                 className="flex-1 cursor-pointer"
                 onClick={() => { setSelectedChildId(child.id); navigate('/dashboard'); }}
               >
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-gray-900">{child.name}</p>
+                  <p className="text-caption font-semibold text-forest-700">{child.name}</p>
                   {child.is_pregnant && <Badge variant="primary">Expecting</Badge>}
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-micro text-gray-400">
                   {child.is_pregnant
                     ? `Due: ${formatDate(child.due_date)}`
                     : `${formatAge(child.date_of_birth)} — ${child.gender || 'Unknown'}`}
@@ -167,23 +167,23 @@ export default function SettingsPage() {
             </div>
           ))}
           {(!children || children.length === 0) && (
-            <p className="text-sm text-gray-400 text-center py-4">No children added yet.</p>
+            <p className="text-caption text-gray-400 text-center py-4">No children added yet.</p>
           )}
         </div>
       </Card>
 
       {/* About */}
-      <Card className="p-4 sm:p-6">
+      <Card className="p-5 sm:p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-            <SettingsIcon className="w-5 h-5 text-gray-600" />
+          <div className="w-10 h-10 bg-cream-200 rounded-xl flex items-center justify-center">
+            <SettingsIcon className="w-5 h-5 text-gray-500" />
           </div>
-          <h2 className="text-lg font-serif font-semibold text-gray-900">About</h2>
+          <h2 className="text-h3 font-serif text-forest-700">About</h2>
         </div>
-        <div className="space-y-2 text-sm text-gray-500">
+        <div className="space-y-2 text-caption text-gray-500">
           <p>ChildBloom v1.0.0</p>
           <p>A child development companion for Indian parents.</p>
-          <p className="text-xs">
+          <p className="text-micro text-gray-400">
             This app provides general guidance based on WHO and IAP recommendations.
             It is not a substitute for professional medical advice.
           </p>
@@ -201,19 +201,19 @@ export default function SettingsPage() {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setChildForm({ ...childForm, childType: 'born' })}
-              className={`p-4 rounded-xl border-2 text-center transition-all ${
-                childForm.childType === 'born' ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+              className={`p-4 rounded-xl border-2 text-center transition-all duration-200 ${
+                childForm.childType === 'born' ? 'border-forest-500 bg-forest-50' : 'border-cream-300'
               }`}
             >
-              <p className="text-sm font-medium">Born child</p>
+              <p className="text-caption font-semibold text-forest-700">Born child</p>
             </button>
             <button
               onClick={() => setChildForm({ ...childForm, childType: 'pregnant' })}
-              className={`p-4 rounded-xl border-2 text-center transition-all ${
-                childForm.childType === 'pregnant' ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+              className={`p-4 rounded-xl border-2 text-center transition-all duration-200 ${
+                childForm.childType === 'pregnant' ? 'border-forest-500 bg-forest-50' : 'border-cream-300'
               }`}
             >
-              <p className="text-sm font-medium">Expecting</p>
+              <p className="text-caption font-semibold text-forest-700">Expecting</p>
             </button>
           </div>
           <Input
@@ -231,16 +231,16 @@ export default function SettingsPage() {
                 onChange={(e) => setChildForm({ ...childForm, date_of_birth: e.target.value })}
               />
               <div className="space-y-1.5">
-                <label className="block text-sm font-medium text-gray-700">Gender</label>
+                <label className="block text-caption font-semibold text-forest-700">Gender</label>
                 <div className="flex gap-2">
                   {GENDERS.map((g) => (
                     <button
                       key={g.value}
                       onClick={() => setChildForm({ ...childForm, gender: g.value })}
-                      className={`flex-1 py-2.5 rounded-xl text-sm font-medium border-2 transition-all ${
+                      className={`flex-1 py-2.5 rounded-xl text-caption font-medium border-2 transition-all duration-200 ${
                         childForm.gender === g.value
-                          ? 'border-primary-500 bg-primary-50 text-primary-700'
-                          : 'border-gray-200 text-gray-600'
+                          ? 'border-forest-500 bg-forest-50 text-forest-700'
+                          : 'border-cream-300 text-gray-600'
                       }`}
                     >
                       {g.label}

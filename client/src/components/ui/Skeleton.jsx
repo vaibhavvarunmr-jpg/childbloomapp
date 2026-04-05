@@ -1,6 +1,6 @@
 export default function Skeleton({ className = '', variant = 'rect' }) {
   const variants = {
-    rect: 'rounded-2xl',
+    rect: 'rounded-xl',
     circle: 'rounded-full',
     text: 'rounded-lg h-4',
   };
@@ -12,13 +12,13 @@ export default function Skeleton({ className = '', variant = 'rect' }) {
 
 export function SkeletonCard() {
   return (
-    <div className="bg-white rounded-3xl border border-gray-100/80 p-6 space-y-4 shadow-soft">
+    <div className="bg-white rounded-2xl border border-cream-300/80 p-6 space-y-4 shadow-card">
       <Skeleton className="h-6 w-1/3" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-2/3" />
       <div className="flex gap-4 pt-2">
-        <Skeleton className="h-10 w-24 rounded-2xl" />
-        <Skeleton className="h-10 w-24 rounded-2xl" />
+        <Skeleton className="h-10 w-24 rounded-xl" />
+        <Skeleton className="h-10 w-24 rounded-xl" />
       </div>
     </div>
   );

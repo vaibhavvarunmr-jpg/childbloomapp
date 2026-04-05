@@ -28,22 +28,22 @@ export default function Sidebar() {
   return (
     <>
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden animate-fade-in" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 bg-black/15 backdrop-blur-sm z-40 lg:hidden animate-fade-in" onClick={() => setSidebarOpen(false)} />
       )}
 
-      <aside className={`fixed top-0 left-0 z-50 h-full w-72 bg-white/95 backdrop-blur-xl border-r border-gray-100/50 transform transition-transform duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed top-0 left-0 z-50 h-full w-72 bg-white border-r border-cream-300/60 transform transition-transform duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Brand */}
           <div className="p-6 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center shadow-glow/50">
+              <div className="w-10 h-10 bg-forest-700 rounded-xl flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
               <div>
-                <h1 className="text-lg font-serif font-bold text-gray-900">ChildBloom</h1>
-                <p className="text-[10px] text-gray-400 font-medium tracking-wide uppercase">Growing Together</p>
+                <h1 className="text-body-lg font-serif font-bold text-forest-700">ChildBloom</h1>
+                <p className="text-micro text-gray-400 uppercase tracking-wider">Growing Together</p>
               </div>
             </div>
           </div>
@@ -61,20 +61,20 @@ export default function Sidebar() {
                 to={item.to}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `group flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 relative ${
+                  `group flex items-center gap-3 px-4 py-2.5 rounded-xl text-caption font-medium transition-all duration-200 relative ${
                     isActive
-                      ? 'bg-gradient-to-r from-primary-50 to-emerald-50/50 text-primary-700'
-                      : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
+                      ? 'bg-forest-50 text-forest-700'
+                      : 'text-gray-500 hover:bg-cream-200 hover:text-forest-600'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
                     {isActive && (
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-gradient-to-b from-primary-400 to-primary-600 rounded-full" />
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-terracotta-400 rounded-r-full" />
                     )}
-                    <div className={`p-1 rounded-xl transition-colors ${isActive ? 'text-primary-600' : 'text-gray-400 group-hover:text-gray-600'}`}>
-                      <item.icon className="w-5 h-5" />
+                    <div className={`transition-colors ${isActive ? 'text-forest-600' : 'text-gray-400 group-hover:text-forest-500'}`}>
+                      <item.icon className="w-[18px] h-[18px]" />
                     </div>
                     {item.label}
                   </>
@@ -84,12 +84,12 @@ export default function Sidebar() {
           </nav>
 
           {/* Sign Out */}
-          <div className="p-3 border-t border-gray-100/50">
+          <div className="p-3 border-t border-cream-300/60">
             <button
               onClick={signOut}
-              className="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-500 hover:bg-red-50 hover:text-red-600 w-full transition-all duration-200"
+              className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-caption font-medium text-gray-500 hover:bg-red-50 hover:text-red-600 w-full transition-all duration-200"
             >
-              <LogoutIcon className="w-5 h-5" />
+              <LogoutIcon className="w-[18px] h-[18px]" />
               Sign Out
             </button>
           </div>

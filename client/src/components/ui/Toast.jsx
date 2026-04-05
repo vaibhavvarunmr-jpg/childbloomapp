@@ -21,10 +21,10 @@ function ToastItem({ toast, onDismiss }) {
   }, []);
 
   const styles = {
-    success: 'bg-gradient-to-r from-primary-500 to-emerald-500 text-white',
-    error: 'bg-gradient-to-r from-red-500 to-rose-500 text-white',
-    info: 'bg-gradient-to-r from-sky-500 to-blue-500 text-white',
-    warning: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white',
+    success: 'bg-forest-700 text-white',
+    error: 'bg-red-600 text-white',
+    info: 'bg-forest-600 text-white',
+    warning: 'bg-amber-500 text-white',
   };
 
   const icons = {
@@ -35,11 +35,11 @@ function ToastItem({ toast, onDismiss }) {
   };
 
   return (
-    <div className={`px-4 py-3 rounded-2xl shadow-soft-lg flex items-center gap-3 min-w-[300px] animate-toast-in ${styles[toast.type] || styles.info}`}>
+    <div className={`px-4 py-3 rounded-xl shadow-lifted flex items-center gap-3 min-w-[300px] animate-toast-in ${styles[toast.type] || styles.info}`}>
       <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={icons[toast.type] || icons.info} />
       </svg>
-      <span className="text-sm font-medium flex-1">{toast.message}</span>
+      <span className="text-caption font-medium flex-1">{toast.message}</span>
       <button onClick={onDismiss} className="opacity-70 hover:opacity-100 transition-opacity" aria-label="Dismiss">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

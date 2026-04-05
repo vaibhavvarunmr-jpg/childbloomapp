@@ -70,9 +70,9 @@ export default function AskAiPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)] sm:h-[calc(100vh-12rem)]">
-      <div className="mb-3 sm:mb-4">
-        <h1 className="text-xl sm:text-2xl font-serif font-bold text-gray-900">Ask ChildBloom AI</h1>
-        <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
+      <div className="mb-4">
+        <h1 className="text-h1 font-serif text-forest-700">Ask ChildBloom AI</h1>
+        <p className="text-body text-gray-500 mt-1">
           Get personalised guidance about {child?.name || 'your child'}'s development
         </p>
       </div>
@@ -82,24 +82,22 @@ export default function AskAiPage() {
         {messages.length === 0 ? (
           <div className="space-y-6 py-4">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <ChatIcon className="w-8 h-8 text-primary-500" />
+              <div className="w-14 h-14 bg-forest-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <ChatIcon className="w-7 h-7 text-forest-600" />
               </div>
-              <p className="text-sm text-gray-500">
+              <p className="text-body text-gray-500">
                 Ask me anything about child development, nutrition, milestones, or parenting.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {suggestedQuestions.map((q) => (
                 <Card
                   key={q}
                   hover
-                  className="p-3 cursor-pointer active:scale-[0.98] transition-transform"
-                  onClick={() => {
-                    setInput(q);
-                  }}
+                  className="p-3.5 cursor-pointer"
+                  onClick={() => setInput(q)}
                 >
-                  <p className="text-xs sm:text-sm text-gray-600">{q}</p>
+                  <p className="text-caption text-gray-600">{q}</p>
                 </Card>
               ))}
             </div>
@@ -108,10 +106,10 @@ export default function AskAiPage() {
           messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div
-                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                className={`max-w-[85%] rounded-2xl px-4 py-3 text-body leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-primary-500 text-white rounded-br-md'
-                    : 'bg-white border border-gray-100 text-gray-700 rounded-bl-md shadow-sm'
+                    ? 'bg-forest-700 text-white rounded-br-md'
+                    : 'bg-white border border-cream-300 text-gray-700 rounded-bl-md shadow-card'
                 }`}
               >
                 <p className="whitespace-pre-line">{msg.content}</p>
@@ -122,11 +120,11 @@ export default function AskAiPage() {
 
         {askMutation.isPending && (
           <div className="flex justify-start">
-            <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
+            <div className="bg-white border border-cream-300 rounded-2xl rounded-bl-md px-4 py-3 shadow-card">
               <div className="flex gap-1.5">
-                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="w-2 h-2 bg-primary-300 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div className="w-2 h-2 bg-forest-300 rounded-full thinking-dot" />
+                <div className="w-2 h-2 bg-forest-300 rounded-full thinking-dot" />
+                <div className="w-2 h-2 bg-forest-300 rounded-full thinking-dot" />
               </div>
             </div>
           </div>
@@ -136,8 +134,8 @@ export default function AskAiPage() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-gray-100 pt-3 sm:pt-4">
-        <div className="flex gap-2">
+      <div className="border-t border-cream-300/60 pt-3 sm:pt-4">
+        <div className="flex gap-2.5">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -155,7 +153,7 @@ export default function AskAiPage() {
             <SendIcon className="w-5 h-5" />
           </Button>
         </div>
-        <MedicalDisclaimer className="mt-2 sm:mt-3" />
+        <MedicalDisclaimer className="mt-2.5" />
       </div>
     </div>
   );
